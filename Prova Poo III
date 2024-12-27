@@ -1,0 +1,50 @@
+class DispensadorCombustivel:
+    def __init__(self, tipo_produto, preco_por_litro, volume_disponivel):
+        self.tipo_produto = tipo_produto
+        self.preco_por_litro = preco_por_litro
+        self.volume_disponivel = volume_disponivel
+
+    def fornecer_por_valor(self, valor):
+        litros_fornecidos = valor / self.preco_por_litro
+        if litros_fornecidos > self.volume_disponivel:
+            print("Volume insuficiente no dispensador.")
+            return
+        self.volume_disponivel -= litros_fornecidos
+        print(f"Fornecido {litros_fornecidos:.2f} litros de {self.tipo_produto}.")
+
+    def fornecer_por_litros(self, litros):
+        if litros > self.volume_disponivel:
+            print("Volume insuficiente no dispensador.")
+            return
+        custo = litros * self.preco_por_litro
+        self.volume_disponivel -= litros
+        print(f"O custo total é R${custo:.2f}.")
+
+    def atualizar_preco(self, novo_preco):
+        self.preco_por_litro = novo_preco
+        print(f"Novo preço por litro: R${novo_preco:.2f}.")
+
+    def atualizar_produto(self, novo_produto):
+        self.tipo_produto = novo_produto
+        print(f"Produto alterado para {novo_produto}.")
+
+    def atualizar_volume(self, novo_volume):
+        self.volume_disponivel = novo_volume
+        print(f"Volume disponível atualizado para {novo_volume:.2f} litros.")
+# Tentativa de uso: 
+dispensador = DispensadorCombustivel("Etanol", 4.29, 1500)
+
+print("\n-- Fornecendo por valor --")
+dispensador.fornecer_por_valor(100)
+
+print("\n-- Fornecendo por litros --")
+dispensador.fornecer_por_litros(20)
+
+print("\n-- Atualizando o preço por litro --")
+dispensador.atualizar_preco(4.59)
+
+print("\n-- Atualizando o tipo de produto --")
+dispensador.atualizar_produto("Gasolina")
+
+print("\n-- Atualizando o volume disponível --")
+dispensador.atualizar_volume(1200)
